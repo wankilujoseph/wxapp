@@ -14,6 +14,8 @@ Page({
   data: {
     bottleState: BottleState.DIRTY,
     selectedTool: null as ToolType,
+    animationTool: null as ToolType,
+    isAnimating: false,
     isHappy: false,
     instructionText: '奶瓶脏了，请先擦干净奶瓶',
     bottleStatusText: '脏奶瓶',
@@ -52,7 +54,7 @@ Page({
     switch (bottleState) {
       case BottleState.DIRTY:
         if (selectedTool === 'wipe') {
-          this.playAction('正在擦拭...', () => {
+          this.playAction('正在擦拭...', 'wipe', () => {
             this.setData({
               bottleState: BottleState.CLEAN,
               bottleStatusText: '干净的奶瓶',
@@ -67,7 +69,7 @@ Page({
 
       case BottleState.CLEAN:
         if (selectedTool === 'powder') {
-          this.playAction('正在倒入伊利奶粉...', () => {
+          this.playAction('正在倒入伊利奶粉...', 'powder', () => {
             this.setData({
               bottleState: BottleState.POWDER_ADDED,
               bottleStatusText: '已加奶粉',
@@ -84,7 +86,7 @@ Page({
 
       case BottleState.POWDER_ADDED:
         if (selectedTool === 'water') {
-          this.playAction('正在倒入温水...', () => {
+          this.playAction('正在倒入温水...', 'water', () => {
             this.setData({
               bottleState: BottleState.WATER_ADDED,
               bottleStatusText: '已加水(混合)',
@@ -99,7 +101,7 @@ Page({
 
       case BottleState.WATER_ADDED:
         if (selectedTool === 'shake') {
-          this.playAction('盖上盖子摇一摇...', () => {
+          this.playAction('盖上盖子摇一摇...', 'shake', () => {
             this.setData({
               bottleState: BottleState.COMPLETED,
               bottleStatusText: '冲调完成',
@@ -126,12 +128,35 @@ Page({
     }
   },
 
+  onRestart() {
+    this.setData({
+      bottleState: BottleState.DIRTY,
+      selectedTool: null,
+      animationTool: null,
+      isAnimating: false,
+      isHappy: false,
+      bottleStatusText: '脏奶瓶',
+      bottleImage: '/images/bottle-dirty.png',
+      babyImage: '/images/baby-hungry.png'
+    }, () => {
+      this.updateInstruction();
+    });
+  },
+
   // 辅助函数：播放动作模拟
-  playAction(title: string, callback: () => void) {
+  playAction(title: string, tool: ToolType, callback: () => void) {
+    this.setData({
+      animationTool: tool,
+      isAnimating: true
+    });
     wx.showLoading({ title });
     setTimeout(() => {
       wx.hideLoading();
       callback();
+      this.setData({
+        animationTool: null,
+        isAnimating: false
+      });
       wx.vibrateShort({ type: 'medium' });
     }, 1000);
   },

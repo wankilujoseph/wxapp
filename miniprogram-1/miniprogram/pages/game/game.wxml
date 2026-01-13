@@ -14,7 +14,10 @@
   <view class="table-area">
     <!-- 奶瓶 -->
     <view class="bottle-container" bindtap="onInteractBottle">
-      <image class="bottle-img" src="{{bottleImage}}" mode="aspectFit"></image>
+      <image class="bottle-img {{animationTool === 'shake' ? 'shake-anim' : ''}}" src="{{bottleImage}}" mode="aspectFit"></image>
+      <view class="tool-effect wipe-effect" wx:if="{{animationTool === 'wipe'}}"></view>
+      <view class="tool-effect powder-effect" wx:if="{{animationTool === 'powder'}}"></view>
+      <view class="tool-effect water-effect" wx:if="{{animationTool === 'water'}}"></view>
       <text class="bottle-label">{{bottleStatusText}}</text>
     </view>
   </view>
@@ -37,5 +40,9 @@
       <image class="icon-img" src="/images/tool-shake.png" mode="aspectFit"></image>
       <text>摇一摇</text>
     </view>
+  </view>
+
+  <view class="restart-bar" wx:if="{{isHappy}}">
+    <button class="restart-btn" bindtap="onRestart">再来一局</button>
   </view>
 </view>
