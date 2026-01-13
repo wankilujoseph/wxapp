@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20rpx;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+  display: block;
+}
+
+.instruction {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.baby-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.baby-img {
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.table-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rpx;
+  margin: 20rpx 0;
+  position: relative;
+}
+
+.bottle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottle-img {
+  width: 200rpx;
+  height: 360rpx; /* Adjusted aspect ratio for bottle */
+}
+
+.bottle-label {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #2d3436;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.tools-bar {
+  height: 200rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10rpx;
+  box-shadow: 0 -4rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15rpx;
+  border-radius: 15rpx;
+  transition: background-color 0.2s;
+  width: 160rpx;
+}
+
+.tool-item.selected {
+  background-color: #ffeaa7;
+  border: 2rpx solid #fdcb6e;
+}
+
+.icon-img {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 10rpx;
+}
