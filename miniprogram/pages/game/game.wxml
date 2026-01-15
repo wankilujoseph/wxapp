@@ -1,0 +1,59 @@
+<view class="container">
+  <image class="bg-image" src="/images/background-room.png" mode="aspectFill"></image>
+  <view class="header">
+    <text class="title">为宝宝冲一杯伊利爱心奶粉</text>
+    <text class="instruction">{{instructionText}}</text>
+  </view>
+
+  <!-- 宝宝区域 -->
+  <view class="baby-area">
+    <image class="baby-img" src="{{babyImage}}" mode="aspectFit"></image>
+  </view>
+
+  <!-- 桌面区域 -->
+  <view class="table-area">
+    <!-- 奶瓶 -->
+    <view class="bottle-container" bindtap="onInteractBottle">
+      <image class="bottle-img {{animationTool === 'shake' ? 'shake-anim' : ''}}" src="{{bottleImage}}" mode="aspectFit"></image>
+      <view class="tool-effect wipe-effect" wx:if="{{animationTool === 'wipe'}}"></view>
+      <view class="tool-effect powder-effect" wx:if="{{animationTool === 'powder'}}"></view>
+      <view class="tool-effect water-effect" wx:if="{{animationTool === 'water'}}"></view>
+      <text class="bottle-label">{{bottleStatusText}}</text>
+    </view>
+  </view>
+
+  <!-- 道具栏 -->
+  <view class="tools-bar">
+    <view class="tool-item {{selectedTool === 'wipe' ? 'selected' : ''}}" bindtap="onSelectTool" data-tool="wipe">
+      <image class="icon-img" src="/images/tool-wipe.png" mode="aspectFit"></image>
+      <text>擦一擦</text>
+    </view>
+    <view class="tool-item {{selectedTool === 'powder' ? 'selected' : ''}}" bindtap="onSelectTool" data-tool="powder">
+      <image class="icon-img" src="/images/tool-powder.png" mode="aspectFit"></image>
+      <text>伊利奶粉</text>
+    </view>
+    <view class="tool-item {{selectedTool === 'water' ? 'selected' : ''}}" bindtap="onSelectTool" data-tool="water">
+      <image class="icon-img" src="/images/tool-water.png" mode="aspectFit"></image>
+      <text>温水</text>
+    </view>
+    <view class="tool-item {{selectedTool === 'shake' ? 'selected' : ''}}" bindtap="onSelectTool" data-tool="shake">
+      <image class="icon-img" src="/images/tool-shake.png" mode="aspectFit"></image>
+      <text>摇一摇</text>
+    </view>
+  </view>
+
+  <!-- 中途广告弹窗 -->
+  <view class="ad-overlay" wx:if="{{showAd}}">
+    <view class="ad-content">
+      <image class="ad-image" src="/images/ad-interstitial.png" mode="widthFix"></image>
+      <view class="ad-close" catchtap="onCloseAd">×</view>
+    </view>
+  </view>
+
+  <!-- 通关成功弹窗 -->
+  <view class="success-overlay" wx:if="{{showSuccess}}">
+    <view class="success-content" bindtap="onRestart">
+      <image class="success-image" src="/images/success-popup.png" mode="widthFix"></image>
+    </view>
+  </view>
+</view>
